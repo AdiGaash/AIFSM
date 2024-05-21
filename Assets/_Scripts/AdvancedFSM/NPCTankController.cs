@@ -91,17 +91,16 @@ public class NPCTankController : AdvancedFSM
         PatrolState patrol = new PatrolState(waypoints, playerNearRadius, patrollingRadius);
         patrol.AddTransition(Transition.SawPlayer, FSMStateID.Chasing);
         patrol.AddTransition(Transition.NoHealth, FSMStateID.Dead);
-
+        
+        DeadState dead = new DeadState();
+        dead.AddTransition(Transition.NoHealth, FSMStateID.Dead);
+        
         //ChaseState chase = new ChaseState(waypoints);
         // add all possible transition from this state
 
         //AttackState attack = new AttackState(waypoints);
         // add all possible transition from this state
-
-
-        DeadState dead = new DeadState();
-        dead.AddTransition(Transition.NoHealth, FSMStateID.Dead);
-
+        
         AddFSMState(patrol);
         AddFSMState(dead);
         //Add the missing states
